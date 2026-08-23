@@ -60,6 +60,11 @@ function renderProgramList() {
       return sum + 1;
     }, 0);
 
+  const totalPhases = (p) => {
+    const groups = new Set(p.blocks.filter((b) => b.days.length).map((b) => b.phase || b.label));
+    return groups.size;
+  };
+
   view.innerHTML = `
     <div class="hero">
       <p class="hero-eyebrow">Futbol Fit</p>
@@ -92,7 +97,7 @@ function renderProgramList() {
       <p class="desc">${esc(p.description || "")}</p>
       <div class="meta-row">
         <span class="chip">${totalWeeks(p)} weeks</span>
-        <span class="chip">${p.blocks.length} phases</span>
+        <span class="chip">${totalPhases(p)} phase${totalPhases(p) === 1 ? "" : "s"}</span>
       </div>
     `;
     card.addEventListener("click", () => setRoute({ name: "program", id: p.id, blockId: p.blocks[0].id }));
@@ -206,7 +211,7 @@ function renderDayBody(day) {
         html += `<div class="lift-row"><span class="lift-name">${exLink(item.main.text, item.main.link)}</span></div>`;
         if (item.corrective) {
           html += `<div class="corrective-row">`;
-          html += `<span class="corrective-badge">During rest</span>`;
+          html += `<span class="corrective-badge">Optional · during rest</span>`;
           html += `<span class="corrective-scheme">${esc(item.corrective.scheme || "")}</span>`;
           html += `<span class="corrective-name">${exLink(item.corrective.text, item.corrective.link)}</span>`;
           html += `</div>`;

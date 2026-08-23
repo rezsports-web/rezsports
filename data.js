@@ -53,6 +53,7 @@ const PROGRAMS = [
       {
         id: "weeks-1-3",
         label: "Weeks 1–3",
+        phase: "Base Strength",
         days: [
           {
             day: "Monday",
@@ -292,6 +293,7 @@ const PROGRAMS = [
       {
         id: "weeks-4-5",
         label: "Weeks 4–5",
+        phase: "Speed & Power",
         days: [
           {
             day: "Monday",
@@ -454,6 +456,7 @@ const PROGRAMS = [
       {
         id: "week-6",
         label: "Week 6 — Fast Exponential Taper",
+        phase: "Speed & Power",
         days: [
           {
             day: "Monday",
@@ -555,6 +558,7 @@ const PROGRAMS = [
       {
         id: "weeks-7-8",
         label: "Weeks 7–8 — Plyo & Conditioning",
+        phase: "Plyo & Conditioning",
         days: [
           {
             day: "Monday (Week 7)",
@@ -717,6 +721,7 @@ const PROGRAMS = [
         {
           id: "week-1",
           label: "Week 1",
+          phase: "Heavy Weights + Corrective",
           days: [
             strengthDay(
               "Monday",
@@ -750,6 +755,7 @@ const PROGRAMS = [
         {
           id: "week-2",
           label: "Week 2",
+          phase: "Heavy Weights + Corrective",
           days: [
             strengthDay(
               "Monday",
@@ -783,6 +789,7 @@ const PROGRAMS = [
         {
           id: "week-3",
           label: "Week 3",
+          phase: "Heavy Weights + Corrective",
           days: [
             strengthDay(
               "Monday",
@@ -816,6 +823,7 @@ const PROGRAMS = [
         {
           id: "week-4",
           label: "Week 4",
+          phase: "Heavy Weights + Corrective",
           days: [
             strengthDay(
               "Monday",
