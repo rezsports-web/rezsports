@@ -700,7 +700,7 @@ const PROGRAMS = [
       name: "Post-Season Plan",
       subtitle: "Recover → Rebuild → Reload",
       description:
-        "A 4-week post-season plan that starts with rest and recovery, then rebuilds heavy-weight strength across squat, hinge, and press patterns — progressing from normal to explosive tempo and increasing intensity week to week.",
+        "A 4-week post-season plan that starts with rest and recovery, then rebuilds heavy-weight strength across squat, hinge, and press patterns.",
       blocks: [
         {
           id: "recovery",
