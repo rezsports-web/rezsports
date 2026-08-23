@@ -42,7 +42,7 @@
 const PROGRAMS = [
   {
     id: "base-strength-8wk",
-    name: "8-Week Performance Build",
+    name: "Pre-Season Plan",
     subtitle: "Strength → Power → Speed & Conditioning",
     description:
       "An 8-week progression from base strength and hip stability into speed, power, and plyometric conditioning. Weeks 1-3 build base strength, weeks 4-5 add speed & lower body power, week 6 is a fast taper, and weeks 7-8 focus on plyometrics and anaerobic/aerobic conditioning.",
@@ -655,4 +655,198 @@ const PROGRAMS = [
       },
     ],
   },
+
+  // ============================================================
+  // POST-SEASON PLAN
+  // ============================================================
+  (function buildPostSeasonProgram() {
+    const L = {
+      backSquat: "https://www.youtube.com/watch?v=vt_8zz7EBrY&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=2",
+      deadlift: "https://www.youtube.com/watch?v=rUjVQxQbSxg&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=3",
+      rdl: "https://www.youtube.com/watch?v=SyfcCPJrvqg&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=4",
+      shoulderPress: "https://www.youtube.com/watch?v=r4X8-2kmIdc&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=5",
+      benchPress: "https://www.youtube.com/watch?v=q_11getlRSA&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=6",
+      scapProtraction: "https://www.youtube.com/watch?v=7vPgJpo20bo&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=7",
+      wallSlide: "https://www.youtube.com/watch?v=doWQW6_-n3s&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=8",
+      inclineBench: "https://www.youtube.com/watch?v=KUc7HrCgnvQ&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=9",
+      monsterWalk: "https://www.youtube.com/watch?v=nD-y6Nelnac&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=10",
+      donkeyKicks: "https://www.youtube.com/watch?v=SS6nm2-KY6k&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=11",
+      tricepExt: "https://www.youtube.com/watch?v=rsabd0GnJhw&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=12",
+      gluteBridge: "https://www.youtube.com/watch?v=qz9OvtawuuY&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=13",
+      lateralWalk: "https://www.youtube.com/watch?v=icYbHneaORg&list=PLfDs06ksKek88Eee-rSdftcCOvIY4QnWi&index=1",
+    };
+
+    const lift = (name, link) => ({ text: name, link });
+    const pair = (liftName, liftLink, cScheme, cName, cLink) => ({
+      main: lift(liftName, liftLink),
+      corrective: { scheme: cScheme, text: cName, link: cLink },
+    });
+    const finisher = (scheme, text) => ({
+      title: "FINISHER",
+      items: [{ scheme, text }],
+    });
+    const strengthDay = (day, note, items, finisherItem) => ({
+      day,
+      title: "Strength",
+      warmup: ["300 Jump Rope"],
+      sections: [
+        { title: "STRENGTH", note, items },
+        finisher(finisherItem.scheme, finisherItem.text),
+      ],
+    });
+
+    return {
+      id: "post-season-4wk",
+      name: "Post-Season Plan",
+      subtitle: "Recover → Rebuild → Reload",
+      description:
+        "A 4-week post-season plan that starts with rest and recovery, then rebuilds heavy-weight strength across squat, hinge, and press patterns — progressing from normal to explosive tempo and increasing intensity week to week.",
+      blocks: [
+        {
+          id: "recovery",
+          label: "Recovery First",
+          days: [],
+          intro: {
+            title: "First Priority After Your Season: Rest & Recover",
+            lead:
+              "Relax — get your mood up again, reduce stress and mental/physical tension. Do things that help you disengage from the game and make you happy and relaxed. Re-establish a good sleep cycle. Take care of nagging injuries.",
+            bullets: ["PT sessions", "Ice / heat / rest", "Massages", "Foot yoga"],
+            footer: "Once you are healed and re-energized, you can begin the building phase below — heavy weights, with optional corrective work during rest.",
+          },
+        },
+        {
+          id: "week-1",
+          label: "Week 1",
+          days: [
+            strengthDay(
+              "Monday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — NORMAL TEMPO",
+              [
+                pair("Back Squat", L.backSquat, "15", "Mini Band Glute Bridge", L.gluteBridge),
+                pair("Incline Bench Press", L.inclineBench, "15 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+            strengthDay(
+              "Wednesday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — NORMAL TEMPO",
+              [
+                pair("Bench Press", L.benchPress, "15 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+                pair("Barbell RDL", L.rdl, "20, 10 ea way", "Mini Band Lateral Walks", L.lateralWalk),
+              ],
+              { scheme: "1X60 sec", text: "Farmers Walk" }
+            ),
+            strengthDay(
+              "Friday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — NORMAL TEMPO",
+              [
+                pair("Barbell Deadlift", L.deadlift, "20, 10 ea way", "Mini Band Lateral Walks", L.lateralWalk),
+                pair("Barbell Shoulder Press", L.shoulderPress, "20, 10 ea arm", "Corrective Supine SA Scap. Protraction w/ Internal Rotation", L.scapProtraction),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+          ],
+        },
+        {
+          id: "week-2",
+          label: "Week 2",
+          days: [
+            strengthDay(
+              "Monday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — NORMAL TEMPO",
+              [
+                pair("Back Squat", L.backSquat, "16, 8 ea leg", "Quadruped Donkey Kicks", L.donkeyKicks),
+                pair("Incline Bench Press", L.inclineBench, "15 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+            strengthDay(
+              "Wednesday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — NORMAL TEMPO",
+              [
+                pair("Bench Press", L.benchPress, "15 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+                pair("Barbell Deadlift", L.deadlift, "20", "Mini Band Glute Bridge", L.gluteBridge),
+              ],
+              { scheme: "1X60 sec", text: "Farmers Walk" }
+            ),
+            strengthDay(
+              "Friday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — NORMAL TEMPO",
+              [
+                pair("Barbell RDL", L.rdl, "30, 15 ea way", "Mini Band Lateral Walks", L.lateralWalk),
+                pair("Barbell Shoulder Press", L.shoulderPress, "5 (up+down = 1 rep)", "Corrective Wall Slide Using Mini Band", L.wallSlide),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+          ],
+        },
+        {
+          id: "week-3",
+          label: "Week 3",
+          days: [
+            strengthDay(
+              "Monday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — EXPLOSIVE TEMPO",
+              [
+                pair("Back Squat", L.backSquat, "25", "Mini Band Glute Bridge", L.gluteBridge),
+                pair("Incline Bench Press", L.inclineBench, "30, 15 ea arm", "Corrective Supine SA Scap. Protraction w/ Internal Rotation", L.scapProtraction),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+            strengthDay(
+              "Wednesday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — EXPLOSIVE TEMPO",
+              [
+                pair("Bench Press", L.benchPress, "20 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+                pair("Barbell RDL", L.rdl, "25", "Mini Band Glute Bridge", L.gluteBridge),
+              ],
+              { scheme: "1X60 sec", text: "Farmers Walk" }
+            ),
+            strengthDay(
+              "Friday",
+              "1 set of movement prep (light weight), then 4X4-6 @ 65% of 1RM — rest 3-5 min — EXPLOSIVE TEMPO",
+              [
+                pair("Barbell Deadlift", L.deadlift, "30, 15 ea direction", "Mini Band Monster Walk", L.monsterWalk),
+                pair("Barbell Shoulder Press", L.shoulderPress, "5 (up+down = 1 rep)", "Corrective Wall Slide Using Mini Band", L.wallSlide),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+          ],
+        },
+        {
+          id: "week-4",
+          label: "Week 4",
+          days: [
+            strengthDay(
+              "Monday",
+              "1 set of movement prep (light weight), then 4X3-5 @ 70-75% of 1RM — rest 3-5 min — EXPLOSIVE TEMPO",
+              [
+                pair("Back Squat", L.backSquat, "40, 20 ea direction", "Mini Band Monster Walk", L.monsterWalk),
+                pair("Incline Bench Press", L.inclineBench, "25 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+            strengthDay(
+              "Wednesday",
+              "1 set of movement prep (light weight), then 4X3-5 @ 70-75% of 1RM — rest 2 min — EXPLOSIVE TEMPO",
+              [
+                pair("Bench Press", L.benchPress, "25 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+                pair("Barbell RDL", L.rdl, "40, 20 ea direction", "Mini Band Monster Walk", L.monsterWalk),
+              ],
+              { scheme: "1X60 sec", text: "Farmers Walk" }
+            ),
+            strengthDay(
+              "Friday",
+              "1 set of movement prep (light weight), then 4X3-5 @ 70-75% of 1RM — rest 2-5 min — EXPLOSIVE TEMPO",
+              [
+                pair("Barbell Deadlift", L.deadlift, "30", "Mini Band Glute Bridge", L.gluteBridge),
+                pair("Barbell Shoulder Press", L.shoulderPress, "25 ea arm", "Mini Band SA Tricep Extension", L.tricepExt),
+              ],
+              { scheme: "1X60 sec", text: "Dead-Hang" }
+            ),
+          ],
+        },
+      ],
+    };
+  })(),
 ];

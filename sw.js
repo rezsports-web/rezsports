@@ -1,4 +1,4 @@
-const CACHE = "futbol-fit-v1";
+const CACHE = "futbol-fit-v2";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,8 @@ const ASSETS = [
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/apple-touch-icon.png",
+  "./icons/logo.png",
+  "./icons/favicon-32.png",
 ];
 
 self.addEventListener("install", (event) => {

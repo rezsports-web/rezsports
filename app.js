@@ -14,6 +14,12 @@ function esc(str) {
   return d.innerHTML;
 }
 
+function exLink(text, link) {
+  const t = esc(text || "");
+  if (!link) return t;
+  return `<a class="ex-link" href="${esc(link)}" target="_blank" rel="noopener noreferrer">${t}<svg class="play-ic" viewBox="0 0 24 24" width="11" height="11"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></a>`;
+}
+
 function setRoute(next) {
   route = next;
   backBtn.hidden = next.name === "programs" || next.name === "today" || next.name === "install";
@@ -48,6 +54,7 @@ function render() {
 function renderProgramList() {
   const totalWeeks = (p) =>
     p.blocks.reduce((sum, b) => {
+      if (!b.days.length) return sum;
       const m = b.label.match(/(\d+)\D+(\d+)/);
       if (m) return sum + (parseInt(m[2]) - parseInt(m[1]) + 1);
       return sum + 1;
@@ -118,7 +125,9 @@ function renderProgram(programId, blockId) {
 
   const dayList = document.getElementById("dayList");
   if (!block.days.length) {
-    dayList.innerHTML = `<p class="empty-note">No days added for this block yet.</p>`;
+    dayList.innerHTML = block.intro
+      ? renderIntro(block.intro)
+      : `<p class="empty-note">No days added for this block yet.</p>`;
     return;
   }
 
@@ -148,6 +157,18 @@ function renderProgram(programId, blockId) {
     if (idx === 0) card.classList.add("open");
     dayList.appendChild(card);
   });
+}
+
+function renderIntro(intro) {
+  let html = `<div class="intro-card">`;
+  if (intro.title) html += `<h3 class="intro-title">${esc(intro.title)}</h3>`;
+  if (intro.lead) html += `<p class="intro-lead">${esc(intro.lead)}</p>`;
+  if (intro.bullets && intro.bullets.length) {
+    html += `<ul class="intro-bullets">${intro.bullets.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>`;
+  }
+  if (intro.footer) html += `<p class="intro-footer">${esc(intro.footer)}</p>`;
+  html += `</div>`;
+  return html;
 }
 
 function renderDayBody(day) {
@@ -180,6 +201,19 @@ function renderDayBody(day) {
       }</div>`;
     }
     section.items.forEach((item) => {
+      if (item.main) {
+        html += `<div class="lift-pair">`;
+        html += `<div class="lift-row"><span class="lift-name">${exLink(item.main.text, item.main.link)}</span></div>`;
+        if (item.corrective) {
+          html += `<div class="corrective-row">`;
+          html += `<span class="corrective-badge">During rest</span>`;
+          html += `<span class="corrective-scheme">${esc(item.corrective.scheme || "")}</span>`;
+          html += `<span class="corrective-name">${exLink(item.corrective.text, item.corrective.link)}</span>`;
+          html += `</div>`;
+        }
+        html += `</div>`;
+        return;
+      }
       html += `<div class="ex-item">`;
       html += `<div class="ex-scheme">${esc(item.scheme || "")}</div>`;
       html += `<div class="ex-text">`;
@@ -193,7 +227,7 @@ function renderDayBody(day) {
         html += `</ul>`;
         if (item.text) html += `<span class="ex-note">${esc(item.text)}</span>`;
       } else {
-        html += esc(item.text || "");
+        html += exLink(item.text, item.link);
       }
       if (item.note) html += `<span class="ex-note">${esc(item.note)}</span>`;
       html += `</div></div>`;
@@ -254,7 +288,7 @@ function renderInstall() {
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
   view.innerHTML = `
     <div class="install-hero">
-      <div class="icon-preview">FF</div>
+      <div class="icon-preview"><img src="icons/logo.png" alt="" /></div>
       <h1 class="hero-title" style="font-size:22px;">Get Futbol Fit on your phone</h1>
       <p class="hero-sub">Install it once — no App Store needed. It lands on your home screen like any other app and works offline.</p>
     </div>
